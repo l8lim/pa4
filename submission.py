@@ -4,6 +4,9 @@ import copy
 from copy import deepcopy
 import numpy as np
 
+#Name: Lianna
+#pid: A18576839
+
 #########################################################
 ############## QUESTION 1 HERE ##################
 #########################################################
@@ -22,7 +25,7 @@ def myFloyd(M):
 #########################################################
 ############## QUESTION 2 HERE ##################
 #########################################################
-def dijkstra_matrix(vertices, edges):
+def myDijkstra(vertices, edges):
     n = len(vertices)
     INF = math.inf
     A = [[INF] * n for _ in range(n)]
@@ -30,8 +33,8 @@ def dijkstra_matrix(vertices, edges):
         A[u][v] = w
     dist = [INF] * n
     prev = [None] * n
-    dist[0] = 0
     visited = [False] * n
+    dist[0] = 0
     for _ in range(n):
         u = None
         best = INF
@@ -47,15 +50,15 @@ def dijkstra_matrix(vertices, edges):
             if w != INF and dist[u] + w < dist[v]:
                 dist[v] = dist[u] + w
                 prev[v] = u
-    paths = {}
+    paths = [[] for _ in range(n)]
     for v in range(n):
         if dist[v] == INF:
             paths[v] = []
         else:
-            path = []
             cur = v
+            tmp = []
             while cur is not None:
-                path.append(cur)
+                tmp.append(cur)
                 cur = prev[cur]
-            paths[v] = path[::-1]
-    return paths, dist
+            paths[v] = tmp[::-1]
+    return (paths, dist)
